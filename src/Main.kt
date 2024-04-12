@@ -4,10 +4,12 @@ fun main() {
     )
     val gameChoice = getGameChoice(options)
     val userChoice = getUserChoice(options)
+    printResult(userChoice, gameChoice)
 }
 
-fun getGameChoice(optionsParameter: Array<String>) {
-    optionsParameter[(Math.random() * optionsParameter.size).toInt()]
+fun getGameChoice(optionsParameter: Array<String>): String {
+    val randomIndex = (Math.random() * optionsParameter.size).toInt()
+    return optionsParameter[randomIndex]
 }
 
 fun getUserChoice(optionsParameter: Array<String>): String {
@@ -31,4 +33,16 @@ fun getUserChoice(optionsParameter: Array<String>): String {
         if (!isValidChoice) println("You must a enter a valid choice.")
     }
     return userChoice
+}
+
+fun printResult(userChoice: String, gameChoice: String) {
+    val result: String
+    //Logic for the result
+    if (userChoice == gameChoice) result = "Tie!"
+    else if ((userChoice == "Rock" && gameChoice == "Scissors") ||
+        (userChoice == "Paper" && gameChoice == "Rock") ||
+        (userChoice == "Scissors" && gameChoice == "Paper")) result = "You win!"
+    else result = "You lose!"
+    // Print the result
+    println("You chose $userChoice. I chose $gameChoice. $result")
 }
